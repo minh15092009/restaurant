@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quản lý nhân viên (Nâng cao)</title>
+  <link rel="stylesheet" href="./css/staff.css" />
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+      <header>
+    <div style="display: flex; align-items: center;" class="logo">
+      <img src="width_800-removebg-preview-removebg-preview.png" alt="Restaurant Logo">
+      <h2 style="margin: 0;">The Cozy Corner</h2>
+    </div>
+    <button id="btn-back" onclick="window.location.href='index.html'">⬅️ Quay lại</button>
+
+  </header>
+  <div class="container">
+    <h1>Quản lý nhân viên</h1>
+
+    <!-- Form thêm nhân viên -->
+    <div class="form-section">
+      <input type="text" id="name" placeholder="Họ tên" />
+      <input type="text" id="position" placeholder="Chức vụ" />
+      <button id="addBtn">Thêm nhân viên</button>
+    </div>
+
+    <!-- Thanh tìm kiếm theo tên -->
+    <div class="filter-section">
+      <input type="text" id="search" placeholder="Tìm theo tên..." />
+      <select id="positionFilter">
+        <option value="">— Chọn chức vụ —</option>
+        <!-- Các option sẽ được đổ tự động từ JS -->
+      </select>
+    </div>
+
+    <!-- Bảng hiển thị nhân viên -->
+    <table>
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Họ tên</th>
+          <th>Chức vụ</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody id="staffList"></tbody>
+    </table>
+  </div>
+
+  <script src="./js/staff.js"></script>
+</body>
+</html>

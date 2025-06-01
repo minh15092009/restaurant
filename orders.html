@@ -1,0 +1,31 @@
+<!-- orders.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đơn hàng của bạn</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center;" class="logo">
+      <img src="width_800-removebg-preview-removebg-preview.png" alt="Restaurant Logo">
+      <h2 style="margin: 0;">The Cozy Corner</h2>
+    </div>
+    <button id="btn-back" onclick="window.location.href='index.html'">⬅️ Quay lại</button>
+
+  </header>
+  <main>
+    <div id="order-list"></div>
+  </main>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  <!-- Firebase config and Order logic -->
+  <script src="./js/firebase-config.js"></script>
+  <script src="./js/order.js"></script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f6f8;
+  background-size: cover;
+}
+
+
+/* Header tổng */
+header {
+  background: rgba(254, 254, 254, 0.9);
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Logo và tên */
+header .logo {
+  display: flex;
+  align-items: center;
+}
+
+header .logo img {
+  width: 50px;
+  height: auto;
+}
+
+header .logo h2 {
+  margin-left: 10px;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+/* Khung chứa Đơn hàng và Đăng xuất */
+header .header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Link đơn hàng */
+.order-icon {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.order-icon img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.order-icon:hover {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+}
+
+/* Nút Đăng xuất */
+#btn-logout {
+  font-size: 16px;
+  padding: 10px 20px;
+  background: #e74c3c;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-weight: 600;
+}
+
+#btn-logout:hover {
+  background: #c0392b;
+}
+
+main {
+  padding: 2em;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+input#search {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1em;
+  margin-bottom: 2em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+#btn-back {
+  font-size: 16px;
+  padding: 8px 16px;
+  background: #3498db; /* màu xanh dịu */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#btn-back:hover {
+  background: #2980b9;
+}
+
+
+/* ======= MÓN ĂN GRID - CHỈNH 1/4 CHIỀU NGANG ======= */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 món trên 1 hàng */
+  gap: 25px;
+}
+
+.food-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  padding: 1em;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.food-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.food-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1em;
+}
+
+.food-card button {
+  padding: 10px 20px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.food-card button:hover {
+  background: #1e8449;
+}
+
+.logo > img {
+  width: 80px;
+  padding-bottom: 10px;
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 1024px) {
+  .food-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 món trên 1 hàng */
+  }
+}
+
+@media (max-width: 768px) {
+  .food-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 món */
+  }
+}
+
+@media (max-width: 480px) {
+  .food-grid {
+    grid-template-columns: 1fr; /* 1 món */
+  }
+}
+a.order-icon img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+a.order-icon:hover img {
+  transform: scale(1.1);
+}
+
+/* ======= ĐƠN HÀNG ======= */
+.order-card {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.order-card-left img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.order-card-right {
+  flex: 1;
+}
+
+.order-card-right h3 {
+  margin: 0 0 8px;
+}
+
+.order-card-right p {
+  margin: 4px 0;
+}
+
+.order-card button {
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.order-card button:hover {
+  background-color: #e04344;
+}
+
+/* style.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel {
+  position: relative;
+  width: 100vw; /* full chiều ngang */
+  height: 500px; /* chiều cao cố định */
+  overflow: hidden;
+}
+
+.carousel-images {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover; /* giữ tỉ lệ hình ảnh đẹp */
+  display: none;
+}
+
+.carousel-item.active {
+  display: block;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 8px 16px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 8px;
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
+}
+a.btn-manage-staff img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+a.btn-manage-staff:hover img {
+  transform: scale(1.1);
+}

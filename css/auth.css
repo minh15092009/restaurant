@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa; /* nền dịu nhẹ */
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+  
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?cs=srgb&dl=pexels-elletakesphotos-1660030.jpg&fm=jpg') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -1; /* Đặt lớp phủ ảnh nền ở dưới cùng */
+  }
+  
+.auth-container {
+  width: 100%;
+  max-width: 420px;
+  background-color: #ffffff;
+  padding: 40px 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.auth-container:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+}
+
+h2 {
+  margin-bottom: 28px;
+  color: #222;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  text-align: left;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0 20px 0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #fcfcfc;
+  color: #333;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+  outline: none;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db; /* đỏ nhẹ sang trọng */
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #2c80c4;
+  transform: translateY(-1px);
+}
+  
+p {
+  font-size: 0.9rem;
+  margin-top: 20px;
+  color: #666;
+}
+
+a {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}

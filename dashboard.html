@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Admin - Restaurant</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="width_800-removebg-preview-removebg-preview.png" alt="Restaurant Logo" />
+    <h2>The Cozy Corner</h2>
+  </div>
+  
+  <div class="header-right">
+    <a href="staff.html" class="btn-manage-staff" >
+      <img src="staff.png" alt="Nhân viên" />
+    </a>
+    <button onclick="signOut()" id="btn-logout">Đăng xuất</button>
+  </div>
+</header>   
+
+  <main>
+    <h3>Quản lí Món Ăn</h3>
+    <button onclick="toggleAddForm()">➕ Thêm Món Ăn</button>
+
+    <div id="add-form" style="display:none; margin-top:20px;">
+      <input id="food-name" placeholder="Tên món" /><br/>
+      <textarea id="food-description" placeholder="Mô tả món" rows="3"></textarea><br/>
+      <input id="food-price" type="number" placeholder="Giá món (VNĐ)" /><br/>
+      <input type="file" id="food-image-file" accept="image/*" /><br/>
+      <button onclick="addFood()">Lưu món ăn</button>
+    </div>
+
+    <h3 style="margin-top:40px;">Danh sách Món Ăn</h3>
+    <div id="admin-food-list" class="food-grid"></div>
+  </main>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

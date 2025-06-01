@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+  <link rel="stylesheet" href="./css/auth.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Register</h2>
+    <form id="register-form">
+        <input type="text" id="register-name" placeholder="Full Name" required />
+        <input type="email" id="register-email" placeholder="Email" required />
+        <input
+          type="password"
+          id="register-password"
+          placeholder="Password"
+          required
+          autocomplete="new-password"
+        />
+        <input
+          type="password"
+          id="confirm-password"
+          placeholder="Confirm Password"
+          required
+          autocomplete="new-password"
+        />
+        <button type="submit">Register</button>
+      </form>
+      
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="./js/firebase-config.js"></script>
+  <script src="./js/register.js"></script>
+</body>
+</html>
+
