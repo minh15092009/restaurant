@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quản lý nguyên liệu</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/ingredient.css">
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center;" class="logo">
+      <img src="width_800-removebg-preview-removebg-preview.png" alt="Restaurant Logo">
+      <h2 style="margin: 0;">The Cozy Corner</h2>
+    </div>
+    <button id="btn-back" onclick="window.location.href='dashboard.html'">⬅️ Quay lại</button>
+  </header>
+
+  <main class="container">
+    <h2>Quản lý nguyên liệu</h2>
+    <div class="form-section">
+      <input type="text" id="ingredientName" placeholder="Tên nguyên liệu" />
+      <input type="text" id="ingredientUnit" placeholder="Đơn vị (kg, lít...)" />
+      <input type="number" id="ingredientUnitPrice" placeholder="Giá nhập (VNĐ/đơn vị)" />
+      <button id="addIngredientBtn">Thêm nguyên liệu</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên</th>
+          <th>Đơn vị</th>
+          <th>Giá nhập (VNĐ)</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody id="ingredientList"></tbody>
+    </table>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+  <script src="./js/firebase-config.js"></script>
+  <script src="./js/ingredient.js"></script>
+</body>
+</html>
+

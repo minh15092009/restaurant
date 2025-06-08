@@ -13,7 +13,7 @@
       <img src="width_800-removebg-preview-removebg-preview.png" alt="Restaurant Logo">
       <h2 style="margin: 0;">The Cozy Corner</h2>
     </div>
-    <button id="btn-back" onclick="window.location.href='index.html'">⬅️ Quay lại</button>
+    <button id="btn-back" onclick="window.location.href='dashboard.html'">⬅️ Quay lại</button>
 
   </header>
   <div class="container">
@@ -28,7 +28,7 @@
 
     <!-- Thanh tìm kiếm theo tên -->
     <div class="filter-section">
-      <input type="text" id="search" placeholder="Tìm theo tên..." />
+      <input type="text" id="search1" placeholder="Tìm theo tên..." />
       <select id="positionFilter">
         <option value="">— Chọn chức vụ —</option>
         <!-- Các option sẽ được đổ tự động từ JS -->
@@ -48,6 +48,12 @@
       <tbody id="staffList"></tbody>
     </table>
   </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+  <script src="./js/firebase-config.js"></script>
 
   <script src="./js/staff.js"></script>
 </body>

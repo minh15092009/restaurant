@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Báo cáo Lãi/Lỗ & Đơn hàng</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/profit.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Thêm Chart.js -->
+</head>
+<body>
+  <header>
+    <div class="logo" style="display:flex; align-items:center;">
+      <img src="width_800-removebg-preview-removebg-preview.png" alt="Restaurant Logo" style="height:40px; margin-right:8px;">
+      <h2 style="margin:0;">The Cozy Corner</h2>
+    </div>
+    <button id="btn-back" onclick="window.location.href='dashboard.html'">⬅️ Quay lại</button>
+  </header>
+
+  <main class="profit-container">
+    <h2>📊 Báo cáo Lãi/Lỗ</h2>
+    <div id="profit-result" class="profit-result">Đang tính toán...</div>
+
+    <h2 style="margin-top:40px;">📈 Biểu đồ đơn hàng theo ngày</h2>
+    <canvas id="orderChart" height="100"></canvas>
+  </main>
+
+  <!-- Firebase SDKs v8 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  <!-- Firebase cấu hình & xử lý -->
+  <script src="./js/firebase-config.js"></script>
+  <script src="./js/profit.js"></script>
+  <script src="./js/chart.js"></script>
+</body>
+</html>
+
