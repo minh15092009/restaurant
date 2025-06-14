@@ -1,8 +1,10 @@
-// js/order-report.js
 
 async function drawOrderChart() {
   try {
-    const ordersSnap = await db.collection('orders').get();
+    const db = firebase.firestore();
+    const ordersSnap = await db.collection('orders')
+      .where('paid', '==', true)
+      .get();
 
     const orderCounts = {};
 
@@ -10,18 +12,19 @@ async function drawOrderChart() {
       const data = doc.data();
       let date;
 
-      // Chuẩn hóa ngày từ trường "time"
-      if (data.time?.toDate) {
-        date = data.time.toDate(); // Firestore Timestamp
-      } else if (typeof data.time === 'string') {
-        date = new Date(data.time); // ISO string
-      } else if (typeof data.time === 'number') {
-        date = new Date(data.time); // epoch
+      // Lấy ngày từ trường "paidDate"
+      if (data.paidDate?.toDate) {
+        date = data.paidDate.toDate(); // Firestore Timestamp
+      } else if (typeof data.paidDate === 'string') {
+        date = new Date(data.paidDate);
+      } else if (typeof data.paidDate === 'number') {
+        date = new Date(data.paidDate);
       }
 
       if (!date || isNaN(date)) return;
 
-      const dayStr = date.toISOString().slice(0, 10); // yyyy-mm-dd
+      // Lấy ngày theo múi giờ Hà Nội (Asia/Ho_Chi_Minh), định dạng yyyy-mm-dd
+      const dayStr = date.toLocaleDateString('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' });
       orderCounts[dayStr] = (orderCounts[dayStr] || 0) + 1;
     });
 
@@ -35,25 +38,41 @@ async function drawOrderChart() {
       data: {
         labels,
         datasets: [{
-          label: 'Số đơn hàng mỗi ngày',
+          label: 'Số đơn đã thanh toán mỗi ngày',
           data: values,
           fill: false,
-          borderColor: '#3498db',
-          tension: 0.2,
+          borderColor: '#2ecc71',
+          backgroundColor: '#2ecc71',
+          tension: 0.3,
           pointRadius: 4,
-          pointBackgroundColor: '#3498db'
+          pointBackgroundColor: '#2ecc71'
         }]
       },
       options: {
         responsive: true,
         plugins: {
-          legend: { display: true }
+          legend: {
+            display: true
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false
+          }
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
         },
         scales: {
           x: {
             title: {
               display: true,
               text: 'Ngày'
+            },
+            ticks: {
+              maxRotation: 60,
+              minRotation: 30
             }
           },
           y: {
@@ -61,7 +80,8 @@ async function drawOrderChart() {
             title: {
               display: true,
               text: 'Số đơn'
-            }
+            },
+            precision: 0
           }
         }
       }

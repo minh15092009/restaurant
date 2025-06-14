@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      // Lấy đơn hàng đã thanh toán của user, order by paidDate
+      // Lấy đơn hàng đã thanh toán của user, sắp xếp theo thời gian mới nhất
       const snapshot = await db.collection("orders")
         .where("user", "==", user.email)
         .where("paid", "==", true)
@@ -25,39 +25,46 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Gom nhóm đơn theo foodId
+      // Gom nhóm đơn theo foodId + thời gian (tách theo từng giờ)
       const groups = {};
       snapshot.docs.forEach(doc => {
         const o = doc.data();
-        if (!groups[o.foodId]) {
-          groups[o.foodId] = {
+        const paidTime = o.paidDate?.toDate?.();
+        if (!paidTime) return;
+
+        const hourKey = `${paidTime.getFullYear()}-${paidTime.getMonth() + 1}-${paidTime.getDate()} ${paidTime.getHours()}:00`;
+        const groupKey = `${o.foodId}_${hourKey}`;
+
+        if (!groups[groupKey]) {
+          groups[groupKey] = {
+            foodId: o.foodId,
             ids: [],
             quantity: 0,
-            paidDate: o.paidDate,
-            firstTime: o.time
+            paidDate: paidTime,
           };
         }
-        groups[o.foodId].ids.push(doc.id);
-        groups[o.foodId].quantity += (o.quantity || 1);
+
+        groups[groupKey].ids.push(doc.id);
+        groups[groupKey].quantity += (o.quantity || 1);
       });
-      debugger
+
       const htmlArr = await Promise.all(
-        Object.entries(groups).map(async ([foodId, grp]) => {
+        Object.entries(groups).map(async ([groupKey, grp]) => {
           let food = null;
           try {
-            const foodDoc = await db.collection("foods").doc(foodId).get();
+            const foodDoc = await db.collection("foods").doc(grp.foodId).get();
             if (foodDoc.exists) food = foodDoc.data();
           } catch (err) {
-            console.warn("Không thể tải món ăn id=", foodId, err);
+            console.warn("Không thể tải món ăn id=", grp.foodId, err);
           }
 
-          const timeStr = grp.paidDate?.toDate
-            ? new Date(grp.paidDate.toDate()).toLocaleString("vi-VN")
+          const timeStr = grp.paidDate
+            ? new Date(grp.paidDate).toLocaleString("vi-VN")
             : "Không xác định";
 
           if (!food) {
             return `
-              <div class="order-card" id="order-group-${foodId}">
+              <div class="order-card" id="order-group-${groupKey}">
                 <p>⚠️ Món đã bị xóa khỏi hệ thống</p>
               </div>
             `;
@@ -66,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const totalPrice = grp.quantity * (food.price || 0);
 
           return `
-            <div class="order-card d-flex border p-3 mb-3" id="order-group-${foodId}">
+            <div class="order-card d-flex border p-3 mb-3" id="order-group-${groupKey}">
               <div class="order-card-left" style="margin-right: 15px;">
                 <img src="${food.image}" alt="${food.name}" style="width:80px; height:80px; object-fit:cover;" />
               </div>
@@ -75,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>Số lượng: <strong>${grp.quantity}</strong></p>
                 <p>Giá mỗi món: <strong>${food.price.toLocaleString("vi-VN")}₫</strong></p>
                 <p>Tổng tiền: <strong>${totalPrice.toLocaleString("vi-VN")}₫</strong></p>
-                <p><small>🕒 Thanh toán ngày: ${timeStr}</small></p>
+                <p><small>🕒 Thanh toán lúc: ${timeStr}</small></p>
               </div>
             </div>
           `;
@@ -94,3 +101,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
