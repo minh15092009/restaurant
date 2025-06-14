@@ -26,7 +26,8 @@ async function calculateProfit() {
 
     ordersSnap.forEach(d => {
       const o = d.data();
-      const f = foodMap[o.foodId];
+      if(o.paid === true){
+        const f = foodMap[o.foodId];
       if (!f) return;
 
       const qty   = Number(o.quantity) || 1;
@@ -41,6 +42,7 @@ async function calculateProfit() {
         const unitCost = Number(info?.unitPrice ?? info?.quantity) || 0;
         totalCost += unitCost * (Number(ing.amount) || 0) * qty;
       });
+      }
     });
 
     renderResult(totalRevenue, totalCost, totalRevenue - totalCost);

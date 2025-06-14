@@ -5,6 +5,7 @@
   <title>Dashboard Admin - Restaurant</title>
   <link rel="stylesheet" href="css/style.css" />
   <!-- thêm CSS cho phần nguyên liệu -->
+  
   <style>
     #ingredient-assign-list { margin: 10px 0; }
     .ing-row {
@@ -25,6 +26,59 @@
       font-size: 18px;
       line-height: 1;
     }
+    #ingredient-assign-list { margin: 10px 0; }
+    .ing-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .ing-row select,
+    .ing-row input {
+      flex: 1;
+      padding: 4px;
+      font-size: 14px;
+    }
+    .ing-row button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* CSS mới cho phần thêm món ăn */
+    #add-form input,
+    #add-form textarea,
+    #add-form button {
+      margin-bottom: 12px; /* Thêm khoảng cách dưới cho các trường nhập và nút */
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      /* width: 100%; */
+      box-sizing: border-box; /* Tính padding và border vào chiều rộng */
+    }
+
+    #add-form button {
+      background-color: #28a745; /* Màu xanh lá cho nút lưu */
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    #add-form button:hover {
+      background-color: #218838;
+    }
+
+    #add-form #addIngredientRow {
+        background-color: #007bff; /* Màu xanh dương cho nút thêm nguyên liệu */
+        margin-top: 5px;
+    }
+
+    #add-form #addIngredientRow:hover {
+        background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
@@ -44,7 +98,7 @@
 
 <main>
   <h3>Quản lí Món Ăn</h3>
-  <button onclick="toggleAddForm()">➕ Thêm Món Ăn</button>
+  <button onclick="toggleAddForm()" class="add-food-btn">➕ Thêm Món Ăn</button>
 
   <div id="add-form" style="display:none; margin-top:20px;">
     <input id="food-name" placeholder="Tên món" /><br/>

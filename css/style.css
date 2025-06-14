@@ -4,10 +4,9 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4f6f8;
-  background-size: cover;
+  background: url('https://media.canva.com/v2/image-resize/format:JPG/height:452/quality:92/uri:ifs%3A%2F%2FM%2F6e0be56d-e91d-492f-89e1-835ab54bc01e/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAAB9NZ36GvPAuI873TxP01jn9LUsToShCoHLtubjWIRpz&exp=1749370820&osig=AAAAAAAAAAAAAAAAAAAAAN1lzh0Wd7uiVA7dwWYCJ8ZUTuX9XU6finu2NExoU0Yr&signer=media-rpc&x-canva-quality=screen') no-repeat center center fixed;
+  background-size: cover; /* Đảm bảo ảnh phủ toàn bộ */
 }
-
 
 header {
   background: rgba(254, 254, 254, 0.9);
@@ -148,6 +147,14 @@ input#search {
   background: #2980b9;
 }
 
+.category-title {
+  margin: 30px 0 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  border-left: 6px solid #27ae60;
+  padding-left: 10px;
+}
 
 /* ======= MÓN ĂN GRID - CHỈNH 1/4 CHIỀU NGANG ======= */
 .food-grid {
@@ -326,3 +333,31 @@ a.order-icon:hover img {
 .carousel-btn.next {
   right: 20px;
 }
+/* Style cho nút "Thêm Món Ăn" */
+    .add-food-btn {
+      padding: 12px 25px; /* Tăng padding */
+      background-color: #28a745; /* Màu xanh lá cây nổi bật */
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px; /* Cỡ chữ lớn hơn */
+      font-weight: 600; /* Đậm hơn */
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Thêm transition cho box-shadow */
+      box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2); /* Đổ bóng nhẹ */
+      margin-bottom: 20px; /* Thêm khoảng cách dưới để tách khỏi form */
+      display: inline-flex; /* Để icon và text căn chỉnh đẹp */
+      align-items: center; /* Căn giữa icon và text */
+      gap: 8px; /* Khoảng cách giữa icon và text */
+    }
+
+    .add-food-btn:hover {
+      background-color: #218838; /* Màu xanh đậm hơn khi hover */
+      transform: translateY(-3px); /* Nâng lên một chút */
+      box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3); /* Đổ bóng mạnh hơn khi hover */
+    }
+
+    .add-food-btn:active {
+      transform: translateY(0); /* Nhấn xuống khi active */
+      box-shadow: 0 2px 5px rgba(40, 167, 69, 0.2);
+    }

@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const snapshot = await db.collection("orders")
         .where("user", "==", user.email)
+        .where("paid", "==", false)
         .orderBy("time", "desc")
         .get();
 
@@ -67,23 +68,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const totalPrice = grp.quantity * (food.price || 0);
 
-return `
-  <div class="order-card" id="order-group-${foodId}">
-    <div class="order-card-left">
-      <img src="${food.image}" alt="${food.name}" />
-    </div>
-    <div class="order-card-right">
-      <h3>${food.name}</h3>
-      <p>Số lượng: <strong>${grp.quantity}</strong></p>
-      <p>Giá mỗi món: <strong>${food.price.toLocaleString("vi-VN")}₫</strong></p>
-      <p>Tổng tiền: <strong>${totalPrice.toLocaleString("vi-VN")}₫</strong></p>
-      <p>Trạng thái: <strong>${statusText}</strong></p>
-      <p><small>🕒 ${timeStr}</small></p>
-      <button onclick="deleteOrderGroup('${foodId}')">🗑️ Xóa đơn</button>
-    </div>
-  </div>
-`;
-
+          return `
+            <div class="order-card" id="order-group-${foodId}">
+              <div class="order-card-left">
+                <img src="${food.image}" alt="${food.name}" />
+              </div>
+              <div class="order-card-right">
+                <h3>${food.name}</h3>
+                <p>Số lượng: <strong>${grp.quantity}</strong></p>
+                <p>Giá mỗi món: <strong>${food.price.toLocaleString("vi-VN")}₫</strong></p>
+                <p>Tổng tiền: <strong>${totalPrice.toLocaleString("vi-VN")}₫</strong></p>
+                <p>Trạng thái: <strong>${statusText}</strong></p>
+                <p><small>🕒 ${timeStr}</small></p>
+                <button onclick="deleteOrderGroup('${foodId}')">🗑️ Xóa đơn</button>
+              </div>
+            </div>
+          `;
         })
       );
 
@@ -124,5 +124,48 @@ async function deleteOrderGroup(foodId) {
   } catch (err) {
     console.error("Xóa order lỗi:", err);
     alert("Không thể xóa đơn hàng. Vui lòng thử lại.");
+  }
+}
+
+async function payment() {
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const db = firebase.firestore();
+  const orderList = document.getElementById("order-list");
+  if (!orderList) {
+    alert("Không thể tìm thấy danh sách đơn hàng.");
+    return;
+  }
+
+  try {
+    const snapshot = await db.collection("orders")
+      .where("user", "==", user.email)
+      .where("paid", "==", false)
+      .orderBy("time", "desc")
+      .get();
+
+    if (snapshot.empty) {
+      orderList.innerHTML = "<p>Chưa có đơn hàng nào.</p>";
+      return;
+    }
+
+    const updatePromises = snapshot.docs.map(doc => {
+      return db.collection("orders").doc(doc.id).update({
+        paid: true,
+        paidDate: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    });
+
+    await Promise.all(updatePromises);
+
+    alert("Thanh toán thành công!");
+    window.location.reload();
+  } catch (error) {
+    console.error("Lỗi khi cập nhật đơn hàng: ", error);
+    alert("Có lỗi xảy ra khi thanh toán, vui lòng thử lại.");
   }
 }
