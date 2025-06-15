@@ -23,7 +23,6 @@ async function drawOrderChart() {
 
       if (!date || isNaN(date)) return;
 
-      // Lấy ngày theo múi giờ Hà Nội (Asia/Ho_Chi_Minh), định dạng yyyy-mm-dd
       const dayStr = date.toLocaleDateString('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' });
       orderCounts[dayStr] = (orderCounts[dayStr] || 0) + 1;
     });
